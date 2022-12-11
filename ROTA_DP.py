@@ -138,7 +138,9 @@ class ROTA_DP:
             if np.any(np.equal(self.winners, playerInds).all(1)):
                 return True
         return False
-            
+    
+    def savePolicy(self, save_file):
+            np.save(save_file, self.policy, allow_pickle=True)
 
 def buildStates():
     board = [0 for i in range(9)]
@@ -154,3 +156,12 @@ def buildStates():
         for p in multiset_permutations(board):
             states.append(p)
     return np.array(states)
+
+if __name__=='__main__':
+    states = buildStates()
+    dp_1 = ROTA_DP(states, 1)
+    dp_2 = ROTA_DP(states, 2)
+    dp_1.trainAndGetPolicy()
+    dp_1.savePolicy("player1.npy")
+    dp_2.trainAndGetPolicy()
+    dp_2.savePolicy("player2.npy")

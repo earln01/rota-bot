@@ -78,6 +78,7 @@ class ROTA_player:
     def setPlayer(self,boardString):
         self.player = 2 if boardString.count('c') else 1
         self.oppPlayer = 1 if self.player==2 else 2
+    
 
 def main(): 
     player = ROTA_player(buildStates())
